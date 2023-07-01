@@ -9,7 +9,7 @@ class Main {
   static final String adminPassword = "admin123";
  
   public static void main(String[] args) {
-    initLibraryData();.
+    initLibraryData();
 
     String isContinue = "y";
 
