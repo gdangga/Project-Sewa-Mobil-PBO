@@ -4,7 +4,7 @@ import java.util.Scanner;
 class Main {
 
   static Scanner scan = new Scanner(System.in);
-  static Garasi library = new Garasi();
+  static Garasi garasi = new Garasi();
   static boolean isAdminMode = false;
   static final String adminPassword = "admin123";
  
@@ -67,13 +67,13 @@ class Main {
     mobil3.setTitle("Daihatsu Xenia");
     mobil3.setHarga(300000);
 
-    library.getMobils().add(mobil1);
-    library.getMobils().add(mobil2);
-    library.getMobils().add(mobil3);
+    garasi.getMobils().add(mobil1);
+    garasi.getMobils().add(mobil2);
+    garasi.getMobils().add(mobil3);
   }
 
   public static void showMenu() {
-    for (Mobil book : library.getMobils()) {
+    for (Mobil book : garasi.getMobils()) {
       System.out.println(book.getId() + " " + book.getTitle());
     }
     System.out.println("================================");
@@ -132,14 +132,14 @@ class Main {
     scan.nextLine();
     customer.name = scan.nextLine();
 
-    library.addCustomer(customer);
+    garasi.addCustomer(customer);
 
     System.out.print("id mobil : ");
     String mobilId = scan.next();
 
     String customerId = customer.id;
 
-    library.giveMobil(mobilId, customerId);
+    garasi.giveMobil(mobilId, customerId);
   }
 
   public static void returnCar() {
@@ -149,7 +149,7 @@ class Main {
     System.out.print("id book : ");
     String mobilId = scan.next();
 
-    library.receiveMobils(mobilId, customerId);
+    garasi.receiveMobils(mobilId, customerId);
   }
 
   public static void addBookToGarage() {
@@ -162,7 +162,7 @@ class Main {
     scan.nextLine();
     mobil.setTitle(scan.nextLine());
 
-    library.getMobils().add(mobil);
+    garasi.getMobils().add(mobil);
 
     System.out.println("Mobil berhasil ditambahkan ke garasi.");
   }
