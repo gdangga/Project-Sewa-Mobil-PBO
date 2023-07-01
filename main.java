@@ -1,169 +1,229 @@
-import java.util.InputMismatchException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
-class Main {
+class Mobil {
+    private String nama;
+    private boolean disewa;
+    private String penyewa;
 
-  static Scanner scan = new Scanner(System.in);
-  static Garasi garasi = new Garasi();
-  static boolean isAdminMode = false;
-  static final String adminPassword = "admin123";
- 
-  public static void main(String[] args) {
-    initLibraryData();
+    public Mobil(String nama) {
+        this.nama = nama;
+        this.disewa = false;
+        this.penyewa = "";
+    }
 
-    String isContinue = "y";
+    public String getNama() {
+        return nama;
+    }
 
-    while (isContinue.equals("y")) {
-      showMenu();
-      int selectedMenu = chooseMenu();
+    public boolean isDisewa() {
+        return disewa;
+    }
 
-      if (selectedMenu == 3) {
-        if (isAdminMode) {
-          isAdminMode = false;
+    public void setDisewa(boolean disewa) {
+        this.disewa = disewa;
+    }
+
+    public String getPenyewa() {
+        return penyewa;
+    }
+
+    public void setPenyewa(String penyewa) {
+        this.penyewa = penyewa;
+    }
+}
+
+class ProgramSewaMobil {
+    private ArrayList<Mobil> daftarMobil;
+    private HashMap<String, ArrayList<String>> riwayatPenyewa;
+    private String passwordAdmin;
+
+    public ProgramSewaMobil(String passwordAdmin) {
+        daftarMobil = new ArrayList<>();
+        riwayatPenyewa = new HashMap<>();
+        this.passwordAdmin = passwordAdmin;
+    }
+
+    public void tambahMobil(Mobil mobil) {
+        daftarMobil.add(mobil);
+    }
+
+    public void sewaMobil(int indeks, String penyewa) {
+        if (indeks >= 0 && indeks < daftarMobil.size()) {
+            Mobil mobil = daftarMobil.get(indeks);
+            if (!mobil.isDisewa()) {
+                mobil.setDisewa(true);
+                mobil.setPenyewa(penyewa);
+                System.out.println("Mobil " + mobil.getNama() + " berhasil disewa oleh " + penyewa + ".");
+                tambahkanRiwayatPenyewa(penyewa, mobil.getNama());
+            } else {
+                System.out.println("Mobil " + mobil.getNama() + " sudah disewa.");
+            }
         } else {
-          System.out.print("Enter admin password: ");
-          String password = scan.next();
-          if (password.equals(adminPassword)) {
-            isAdminMode = true;
-            System.out.println("Logged in as admin.");
-          } else {
-            System.out.println("Password admin salah.");
-          }
+            System.out.println("Indeks mobil tidak valid.");
         }
-      } else if (selectedMenu == 4 && isAdminMode) {
-        addBookToGarage();
-      } else if (selectedMenu == 1) {
-        // Sewa Mobil
-        rentaCar();
-      } else if (selectedMenu == 2) {
-        // Kembalikan Mobil
-        returnCar();
-      } else if (selectedMenu == 5 && isAdminMode) {
-        // Logout admin
-        isAdminMode = false;
-        System.out.println("Logged out from admin mode.");
-      } else {
-        System.out.println("Input salah, masukkan angka dari 1 sampai 4");
-      }
-
-      System.out.print("Continue? ");
-      isContinue = scan.next();
     }
-  }
 
-  public static void initLibraryData() {
-    Mobil mobil1 = new Mobil();
-    mobil1.setId("1");
-    mobil1.setTitle("Toyota Avanza");
-    mobil1.setHarga(300000);
-
-    Mobil mobil2 = new Mobil();
-    mobil2.setId("2");
-    mobil2.setTitle("Suzuki Apv");
-    mobil2.setHarga(300000);
-
-    Mobil mobil3 = new Mobil();
-    mobil3.setId("3");
-    mobil3.setTitle("Daihatsu Xenia");
-    mobil3.setHarga(300000);
-
-    garasi.getMobils().add(mobil1);
-    garasi.getMobils().add(mobil2);
-    garasi.getMobils().add(mobil3);
-  }
-
-  public static void showMenu() {
-    for (Mobil book : garasi.getMobils()) {
-      System.out.println(book.getId() + " " + book.getTitle());
-    }
-    System.out.println("================================");
-    System.out.println("1. Sewa Mobil");
-    System.out.println("2. Kembalikan Mobil");
-    System.out.println("3. Admin Mode");
-    if (isAdminMode) {
-      System.out.println("4. Tambahkan Mobil ke Garasi");
-      System.out.println("5. Logout admin");
-
-    }
-    System.out.println("================================");
-  }
-
-  public static int chooseMenu() {
-    int pilihan = 0;
-    boolean validInput = false;
-
-    while (!validInput) {
-      try {
-        System.out.print("Choose menu: ");
-        pilihan = scan.nextInt();
-
-        if (isAdminMode) {
-          if (pilihan < 1 || pilihan > 5) {
-            throw new InputMismatchException();
-          }
+    public void kembalikanMobil(int indeks) {
+        if (indeks >= 0 && indeks < daftarMobil.size()) {
+            Mobil mobil = daftarMobil.get(indeks);
+            if (mobil.isDisewa()) {
+                mobil.setDisewa(false);
+                String penyewa = mobil.getPenyewa();
+                mobil.setPenyewa("");
+                System.out.println("Mobil " + mobil.getNama() + " berhasil dikembalikan oleh " + penyewa + ".");
+            } else {
+                System.out.println("Mobil " + mobil.getNama() + " tidak sedang disewa.");
+            }
         } else {
-          if (pilihan < 1 || pilihan > 3) {
-            throw new InputMismatchException();
-          }
+            System.out.println("Indeks mobil tidak valid.");
         }
-
-        validInput = true;
-      } catch (InputMismatchException e) {
-        System.out.println("Maaf, masukkan angka sesuai pilihan menu.");
-        scan.nextLine();
-      }
     }
 
-    return pilihan;
-  }
+    public void tampilkanDaftarMobil() {
+        System.out.println("Daftar Mobil:");
+        for (int i = 0; i < daftarMobil.size(); i++) {
+            Mobil mobil = daftarMobil.get(i);
+            System.out.print(i + ". " + mobil.getNama());
+            if (mobil.isDisewa()) {
+                System.out.println(" (Disewa oleh " + mobil.getPenyewa() + ")");
+            } else {
+                System.out.println(" (Tersedia)");
+            }
+        }
+    }
 
+    private void tambahkanRiwayatPenyewa(String penyewa, String mobil) {
+        if (riwayatPenyewa.containsKey(penyewa)) {
+            ArrayList<String> riwayat = riwayatPenyewa.get(penyewa);
+            riwayat.add(mobil);
+        } else {
+            ArrayList<String> riwayat = new ArrayList<>();
+            riwayat.add(mobil);
+            riwayatPenyewa.put(penyewa, riwayat);
+        }
+    }
 
-  public static void rentaCar() {
-    Customer customer = new Customer();
+    public void tampilkanRiwayatPenyewa() {
+        System.out.println("Riwayat Penyewa:");
+        for (String penyewa : riwayatPenyewa.keySet()) {
+            System.out.println("Penyewa: " + penyewa);
+            ArrayList<String> riwayat = riwayatPenyewa.get(penyewa);
+            System.out.println("Mobil yang disewa:");
+            for (String mobil : riwayat) {
+                System.out.println("- " + mobil);
+            }
+            System.out.println();
+        }
+    }
 
-    System.out.print("id : ");
-    customer.id = scan.next();
+    public boolean isValidPassword(String password) {
+        return password.equals(passwordAdmin);
+    }
+}
 
-    System.out.print("nama : ");
-    scan.nextLine();
-    customer.name = scan.nextLine();
+public class Main {
+    public static void main(String[] args) {
+        ProgramSewaMobil program = new ProgramSewaMobil("admin123");
 
-    System.out.print("Nomor Telepon : ");
-    scan.nextLine();
-    customer.name = scan.nextLine();
+        // Tambahkan mobil ke daftar
+        program.tambahMobil(new Mobil("Avanza"));
+        program.tambahMobil(new Mobil("Innova"));
+        program.tambahMobil(new Mobil("Ertiga"));
 
-    garasi.addCustomer(customer);
+        Scanner scanner = new Scanner(System.in);
+        int pilihan;
+        boolean isAdminMode = false;
 
-    System.out.print("id mobil : ");
-    String mobilId = scan.next();
+        do {
+            System.out.println("\n===== Menu =====");
+            System.out.println("1. Tampilkan Daftar Mobil");
+            System.out.println("2. Sewa Mobil");
+            System.out.println("3. Kembalikan Mobil");
+            System.out.println("4. Tampilkan Riwayat Penyewa");
+            System.out.println("5. Mode Admin");
+            System.out.println("6. Keluar");
+            System.out.print("Pilihan Anda: ");
+            pilihan = scanner.nextInt();
 
-    String customerId = customer.id;
+            switch (pilihan) {
+                case 1:
+                    program.tampilkanDaftarMobil();
+                    break;
+                case 2:
+                    if (isAdminMode) {
+                        System.out.println("Anda berada dalam Mode Admin. Tidak dapat melakukan aksi ini.");
+                        break;
+                    }
+                    System.out.print("Masukkan indeks mobil yang ingin disewa: ");
+                    int indeksSewa = scanner.nextInt();
+                    scanner.nextLine(); // Membersihkan newline character dari input sebelumnya
+                    System.out.print("Masukkan nama penyewa: ");
+                    String penyewa = scanner.nextLine();
+                    program.sewaMobil(indeksSewa, penyewa);
+                    break;
+                case 3:
+                    if (isAdminMode) {
+                        System.out.println("Anda berada dalam Mode Admin. Tidak dapat melakukan aksi ini.");
+                        break;
+                    }
+                    System.out.print("Masukkan indeks mobil yang ingin dikembalikan: ");
+                    int indeksKembali = scanner.nextInt();
+                    program.kembalikanMobil(indeksKembali);
+                    break;
+                case 4:
+                    program.tampilkanRiwayatPenyewa();
+                    break;
+                case 5:
+                    System.out.print("Masukkan password Admin: ");
+                    String password = scanner.next();
+                    if (program.isValidPassword(password)) {
+                        isAdminMode = true;
+                        System.out.println("Anda telah masuk ke Mode Admin.");
+                    } else {
+                        System.out.println("Password Admin salah. Mode Admin tidak dapat diakses.");
+                    }
+                    break;
+                case 6:
+                    System.out.println("Terima kasih!");
+                    break;
+                default:
+                    System.out.println("Pilihan tidak valid.");
+                    break;
+            }
 
-    garasi.giveMobil(mobilId, customerId);
-  }
+            if (isAdminMode) {
+                if (pilihan == 5) {
+                    do {
+                        System.out.println("\n===== Mode Admin =====");
+                        System.out.println("1. Tambah Mobil");
+                        System.out.println("2. Kembali ke Menu Utama");
+                        System.out.print("Pilihan Anda: ");
+                        pilihan = scanner.nextInt();
 
-  public static void returnCar() {
-    System.out.print("id member : ");
-    String customerId = scan.next();
-
-    System.out.print("id book : ");
-    String mobilId = scan.next();
-
-    garasi.receiveMobils(mobilId, customerId);
-  }
-
-  public static void addBookToGarage() {
-    Mobil mobil = new Mobil();
-
-    System.out.print("id: ");
-    mobil.setId(scan.next());
-
-    System.out.print("title: ");
-    scan.nextLine();
-    mobil.setTitle(scan.nextLine());
-
-    garasi.getMobils().add(mobil);
-
-    System.out.println("Mobil berhasil ditambahkan ke garasi.");
-  }
+                        switch (pilihan) {
+                            case 1:
+                                System.out.print("Masukkan nama mobil yang ingin ditambahkan: ");
+                                scanner.nextLine(); // Membersihkan newline character dari input sebelumnya
+                                String namaMobil = scanner.nextLine();
+                                program.tambahMobil(new Mobil(namaMobil));
+                                System.out.println("Mobil " + namaMobil + " berhasil ditambahkan.");
+                                break;
+                            case 2:
+                                isAdminMode = false;
+                                System.out.println("Keluar dari Mode Admin.");
+                                break;
+                            default:
+                                System.out.println("Pilihan tidak valid.");
+                                break;
+                        }
+                    } while (pilihan != 2);
+                } else {
+                    System.out.println("Anda harus keluar dari Mode Admin terlebih dahulu untuk mengakses menu lain.");
+                    isAdminMode = false;
+                }
+            }
+        } while (pilihan != 6);
+    }
 }
