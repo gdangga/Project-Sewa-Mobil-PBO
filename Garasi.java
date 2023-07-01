@@ -8,7 +8,7 @@ class Garasi {
     for (Customer c : this.getCustomers()) {
       if (c.id.equals(customer.id)) {
         System.out.println("Id member ini sudah ada: " + customer.id);
-        return;
+        return; 
       } 
     }
     this.getCustomers().add(customer);

@@ -7,9 +7,9 @@ class Main {
   static Garasi library = new Garasi();
   static boolean isAdminMode = false;
   static final String adminPassword = "admin123";
-
+ 
   public static void main(String[] args) {
-    initLibraryData();
+    initLibraryData();.
 
     String isContinue = "y";
 
