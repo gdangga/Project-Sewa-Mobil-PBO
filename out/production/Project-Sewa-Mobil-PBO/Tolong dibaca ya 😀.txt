@@ -1,0 +1,10 @@
+Project-Sewa-Mobil-PBO author Gdangga
+Project ini belum 100 persen jadi, dikarenakan belum lengkapnya 4 pilarr oop dan revisi terhadap 
+code yang belum teratur karena saya mengambil beberapa code di google dan bantuan ai untuk error yang 
+terjadi untuk mempercantik penulisan code disini saya gunakan code beautify supaya penulisannya rapi
+
+Sekian dari saya, setelah saya mengumpul link ini setiap harinya akan saya revisi code ini supaya 
+lebih mudah dimengerti, terstruktur, dan berisi 4 pilar oop.
+
+Jika dari Ibu Dosen ingin merevisi atau mengkoreksi hal apapun dari code yang saya kembangkan, 
+saya sangat mengharapkan hal tersebut untuk membantu saya dalam mengembangkan code ini dan lancar saat presentasi :) 
