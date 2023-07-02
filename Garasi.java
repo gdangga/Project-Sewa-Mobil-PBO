@@ -1,0 +1,92 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
+class Garasi {
+    private ArrayList<Mobil> daftarMobil;
+    private HashMap<String, ArrayList<String>> riwayatPenyewa;
+    private String passwordAdmin;
+
+    public Garasi(String passwordAdmin) {
+        daftarMobil = new ArrayList<>();
+        riwayatPenyewa = new HashMap<>();
+        this.passwordAdmin = passwordAdmin;
+    }
+
+    public void tambahMobil(Mobil mobil) {
+        daftarMobil.add(mobil);
+    }
+
+    public void sewaMobil(int indeks, String penyewa, int durasi) {
+        if (indeks >= 1 && indeks <= daftarMobil.size()) {
+            Mobil mobil = daftarMobil.get(indeks - 1);
+            if (!mobil.isDisewa()) {
+                mobil.setDisewa(true);
+                mobil.setPenyewa(penyewa);
+                double totalHarga = mobil.getHarga() * durasi;
+                System.out.println("Mobil " + mobil.getNama() + " berhasil disewa oleh " + penyewa + ".");
+                System.out.println("Durasi: " + durasi + " hari");
+                System.out.println("Total Harga: " + totalHarga);
+                tambahkanRiwayatPenyewa(penyewa, mobil.getNama());
+            } else {
+                System.out.println("Mobil " + mobil.getNama() + " sudah disewa.");
+            }
+        } else {
+            System.out.println("Indeks mobil tidak valid.");
+        }
+    }
+
+    public void kembalikanMobil(int indeks) {
+        if (indeks >= 1 && indeks <= daftarMobil.size()) {
+            Mobil mobil = daftarMobil.get(indeks - 1);
+            if (mobil.isDisewa()) {
+                mobil.setDisewa(false);
+                String penyewa = mobil.getPenyewa();
+                mobil.setPenyewa("");
+                System.out.println("Mobil " + mobil.getNama() + " berhasil dikembalikan oleh " + penyewa + ".");
+            } else {
+                System.out.println("Mobil " + mobil.getNama() + " tidak sedang disewa.");
+            }
+        } else {
+            System.out.println("Indeks mobil tidak valid.");
+        }
+    }
+
+    public void tampilkanDaftarMobil() {
+        System.out.println("Daftar Mobil:");
+        for (int i = 0; i < daftarMobil.size(); i++) {
+            Mobil mobil = daftarMobil.get(i);
+            String status = mobil.isDisewa() ? "Disewa" : "Tersedia";
+            int index = i + 1;
+            System.out.println(index + ". " + mobil.getNama() + " - Harga per Hari: " + mobil.getHarga() + " - Status: " + status);
+        }
+    }
+
+
+    private void tambahkanRiwayatPenyewa(String penyewa, String mobil) {
+        if (riwayatPenyewa.containsKey(penyewa)) {
+            ArrayList<String> riwayat = riwayatPenyewa.get(penyewa);
+            riwayat.add(mobil);
+        } else {
+            ArrayList<String> riwayat = new ArrayList<>();
+            riwayat.add(mobil);
+            riwayatPenyewa.put(penyewa, riwayat);
+        }
+    }
+
+    public void tampilkanRiwayatPenyewa() {
+        System.out.println("Riwayat Penyewa:");
+        for (String penyewa : riwayatPenyewa.keySet()) {
+            System.out.println("Penyewa: " + penyewa);
+            ArrayList<String> riwayat = riwayatPenyewa.get(penyewa);
+            System.out.println("Mobil yang disewa:");
+            for (String mobil : riwayat) {
+                System.out.println("- " + mobil);
+            }
+            System.out.println();
+        }
+    }
+
+    public boolean isValidPassword(String password) {
+        return password.equals(passwordAdmin);
+    }
+}
