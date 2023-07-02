@@ -51,7 +51,7 @@ public class Main {
                     if (garasi.isValidPassword(password)) {
                         System.out.println("Mode Admin diakses.");
                         isAdminMode = true;
-                        do { 
+                        do {
                             System.out.println("\n===== Mode Admin =====");
                             System.out.println("1. Tambah Mobil");
                             System.out.println("2. Kembali ke Menu Utama");
