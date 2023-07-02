@@ -90,12 +90,6 @@ public class Main {
                     break;
             }
 
-            if (isAdminMode) {
-                if (pilihan == 5) {
-                    System.out.println("Anda harus keluar dari Mode Admin terlebih dahulu untuk mengakses menu lain.");
-                    isAdminMode = false;
-                }
-            }
         } while (pilihan != 5);
     }
 }
