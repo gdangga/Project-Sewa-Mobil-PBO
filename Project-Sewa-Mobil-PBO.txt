@@ -7,4 +7,4 @@ Sekian dari saya, setelah saya mengumpul link ini setiap harinya akan saya revis
 lebih mudah dimengerti, terstruktur, dan berisi 4 pilar oop.
 
 Jika dari Ibu Dosen ingin merevisi atau mengkoreksi hal apapun dari code yang saya kembangkan, 
-saya sangat mengharapkan hal tersebut untuk membantu saya dalam mengembangkan code ini dan lancar saat presentasi :)
+saya sangat mengharapkan hal tersebut untuk membantu saya dalam mengembangkan code ini dan lancar saat presentasi :) 
