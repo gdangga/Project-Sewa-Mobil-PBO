@@ -1,4 +1,4 @@
-class Mobil {
+abstract class Mobil {
     private String nama;
     private boolean disewa;
     private String penyewa;
@@ -33,5 +33,24 @@ class Mobil {
 
     public double getHarga() {
         return harga;
+    }
+
+    public abstract String getTipe();
+}
+
+class SUV extends Mobil {
+    private String sistemPenggerak;
+
+    public SUV(String nama, double harga, String sistemPenggerak) {
+        super(nama, harga);
+        this.sistemPenggerak = sistemPenggerak;
+    }
+
+    public String getSistemPenggerak() {
+        return sistemPenggerak;
+    }
+
+    public String getTipe() {
+        return "SUV";
     }
 }
