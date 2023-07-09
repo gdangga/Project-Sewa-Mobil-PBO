@@ -70,6 +70,7 @@ public class Main {
                             System.out.println("1. Tambah Mobil");
                             System.out.println("2. Kembali ke Menu Utama");
                             System.out.println("3. Tampilkan Riwayat Penyewa");
+                            System.out.println("4. Hapus Mobil dari garasi");
                             System.out.print("Pilihan Anda: ");
                             pilihan = scanner.nextInt();
 
@@ -94,6 +95,11 @@ public class Main {
                                     break;
                                 case 3:
                                     garasi.tampilkanRiwayatPenyewa();
+                                    break;
+                                case 4:
+                                    System.out.print("Masukkan indeks mobil yang ingin dihapus: ");
+                                    int indeksHapus = scanner.nextInt();
+                                    garasi.hapusMobil(indeksHapus);
                                     break;
                                 default:
                                     System.out.println("Pilihan tidak valid.");

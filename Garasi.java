@@ -94,6 +94,21 @@ class Garasi {
         }
     }
 
+    public void hapusMobil(int indeks) {
+        if (indeks >= 1 && indeks <= daftarMobil.size()) {
+            Mobil mobil = daftarMobil.get(indeks - 1);
+            if (!mobil.isDisewa()) {
+                daftarMobil.remove(indeks - 1);
+                System.out.println("Mobil " + mobil.getNama() + " berhasil dihapus.");
+            } else {
+                System.out.println("Mobil " + mobil.getNama() + " sedang disewa. Tidak dapat menghapus mobil yang sedang disewa.");
+            }
+        } else {
+            System.out.println("Indeks mobil tidak valid.");
+        }
+    }
+
+
     public boolean isValidPassword(String password) {
         return password.equals(passwordAdmin);
     }

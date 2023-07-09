@@ -13,6 +13,7 @@ abstract class Mobil {
     }
 
     public String getNama() {
+
         return nama;
     }
 
@@ -21,18 +22,22 @@ abstract class Mobil {
     }
 
     public void setDisewa(boolean disewa) {
+
         this.disewa = disewa;
     }
 
     public String getPenyewa() {
+
         return penyewa;
     }
 
     public void setPenyewa(String penyewa) {
+
         this.penyewa = penyewa;
     }
 
     public double getHarga() {
+
         return harga;
     }
 
@@ -48,10 +53,12 @@ class SUV extends Mobil {
     }
 
     public String getSistemPenggerak() {
+
         return sistemPenggerak;
     }
 
     public String getTipe() {
+
         return "SUV";
     }
 }
