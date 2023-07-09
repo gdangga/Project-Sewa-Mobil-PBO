@@ -14,7 +14,12 @@ class Garasi {
     }
 
     public void tambahMobil(Mobil mobil) {
+
         daftarMobil.add(mobil);
+    }
+
+    public void tambahMobil(SUV suv) {
+        daftarMobil.add(suv);
     }
 
     public void sewaMobil(int indeks, String penyewa, int durasi) {
@@ -24,7 +29,7 @@ class Garasi {
                 mobil.setDisewa(true);
                 mobil.setPenyewa(penyewa);
                 double totalHarga = mobil.getHarga() * durasi;
-                System.out.println("Mobil " + mobil.getNama() + " berhasil disewa oleh " + penyewa + " dengan tipe " + mobil.getTipe());
+                System.out.println("Mobil " + mobil.getNama() + " berhasil disewa oleh " + penyewa);
                 System.out.println("Durasi: " + durasi + " hari");
                 System.out.println("Total Harga: " + totalHarga);
                 tambahkanRiwayatPenyewa(penyewa, mobil.getNama());
@@ -47,7 +52,7 @@ class Garasi {
                 if (namaPenyewa.equalsIgnoreCase(mobil.getPenyewa())) {
                     mobil.setDisewa(false);
                     mobil.setPenyewa("");
-                    System.out.println("Mobil " + mobil.getNama() + " berhasil dikembalikan oleh " + namaPenyewa + ".");
+                    System.out.println("Mobil " + mobil.getNama() + " berhasil dikembalikan oleh " + namaPenyewa + " Terimakasih.");
                 } else {
                     System.out.println("Nama penyewa yang dimasukkan tidak sesuai. Mobil " + mobil.getNama() + " tidak dapat dikembalikan.");
                 }
@@ -60,12 +65,15 @@ class Garasi {
     }
 
     public void tampilkanDaftarMobil() {
+        System.out.println(" ");
+        System.out.println(" ");
+        System.out.println(" ");
         System.out.println("Daftar Mobil:");
         for (int i = 0; i < daftarMobil.size(); i++) {
             Mobil mobil = daftarMobil.get(i);
             String status = mobil.isDisewa() ? "Disewa" : "Tersedia";
             int index = i + 1;
-            System.out.println(index + ". " + mobil.getNama() + " - Harga per Hari: " + mobil.getHarga() + " - Status: " + status);
+            System.out.println(index + ". " + mobil + " - Status: " + status);
         }
     }
 

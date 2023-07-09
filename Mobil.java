@@ -1,15 +1,17 @@
-abstract class Mobil {
+class Mobil {
     private String nama;
     private boolean disewa;
     private String penyewa;
     private double harga;
+    private String tipe;
 
 
-    public Mobil(String nama, double harga) {
+    public Mobil(String nama, double harga, String tipe) {
         this.nama = nama;
         this.disewa = false;
         this.penyewa = "";
         this.harga = harga;
+        this.tipe = tipe;
     }
 
     public String getNama() {
@@ -41,24 +43,28 @@ abstract class Mobil {
         return harga;
     }
 
-    public abstract String getTipe();
+    public String getTipe() {
+        return tipe;
+    }
+    @Override
+    public String toString() {
+        return getNama() + " - Tipe: " + getTipe() + " - Harga per Hari: " + getHarga();
+    }
 }
 
 class SUV extends Mobil {
     private String sistemPenggerak;
 
-    public SUV(String nama, double harga, String sistemPenggerak) {
-        super(nama, harga);
+    public SUV(String nama, double harga, String tipe, String sistemPenggerak) {
+        super(nama, harga, tipe);
         this.sistemPenggerak = sistemPenggerak;
     }
 
     public String getSistemPenggerak() {
-
         return sistemPenggerak;
     }
-
-    public String getTipe() {
-
-        return "SUV";
+    @Override
+    public String toString() {
+        return super.toString() + " - Sistem Penggerak: " + getSistemPenggerak();
     }
 }
