@@ -4,6 +4,7 @@ abstract class Mobil {
     private String penyewa;
     private double harga;
 
+
     public Mobil(String nama, double harga) {
         this.nama = nama;
         this.disewa = false;

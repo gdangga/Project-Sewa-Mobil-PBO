@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 class Garasi {
     private ArrayList<Mobil> daftarMobil;
@@ -39,10 +40,17 @@ class Garasi {
         if (indeks >= 1 && indeks <= daftarMobil.size()) {
             Mobil mobil = daftarMobil.get(indeks - 1);
             if (mobil.isDisewa()) {
-                mobil.setDisewa(false);
-                String penyewa = mobil.getPenyewa();
-                mobil.setPenyewa("");
-                System.out.println("Mobil " + mobil.getNama() + " berhasil dikembalikan oleh " + penyewa + ".");
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("Masukkan nama penyewa: ");
+                String namaPenyewa = scanner.nextLine();
+
+                if (namaPenyewa.equalsIgnoreCase(mobil.getPenyewa())) {
+                    mobil.setDisewa(false);
+                    mobil.setPenyewa("");
+                    System.out.println("Mobil " + mobil.getNama() + " berhasil dikembalikan oleh " + namaPenyewa + ".");
+                } else {
+                    System.out.println("Nama penyewa yang dimasukkan tidak sesuai. Mobil " + mobil.getNama() + " tidak dapat dikembalikan.");
+                }
             } else {
                 System.out.println("Mobil " + mobil.getNama() + " tidak sedang disewa.");
             }

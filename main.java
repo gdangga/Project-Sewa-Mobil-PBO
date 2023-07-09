@@ -27,7 +27,6 @@ public class Main {
         boolean isAdminMode = false;
 
         do {
-            System.out.println("\n===== GDa RentCar =====");
             garasi.tampilkanDaftarMobil();
             System.out.println("\n===== Menu =====");
             System.out.println("1. Sewa Mobil");
@@ -36,6 +35,7 @@ public class Main {
             pilihan = scanner.nextInt();
 
             switch (pilihan) {
+
                 case 1:
                     if (isAdminMode) {
                         System.out.println("Anda berada dalam Mode Admin. Tidak dapat melakukan aksi ini.");
@@ -60,17 +60,48 @@ public class Main {
                     garasi.kembalikanMobil(indeksKembali);
                     break;
                 case 3:
-                    if (isAdminMode) {
-                        garasi.tampilkanRiwayatPenyewa();
+                    System.out.print("Masukkan password Admin: ");
+                    String password = scanner.next();
+                    if (garasi.isValidPassword(password)) {
+                        System.out.println("Mode Admin diakses.");
+                        isAdminMode = true;
+                        do {
+                            System.out.println("\n===== Mode Admin =====");
+                            System.out.println("1. Tambah Mobil");
+                            System.out.println("2. Kembali ke Menu Utama");
+                            System.out.println("3. Tampilkan Riwayat Penyewa");
+                            System.out.print("Pilihan Anda: ");
+                            pilihan = scanner.nextInt();
+
+                            switch (pilihan) {
+                                case 1:
+                                    System.out.print("Masukkan nama mobil yang ingin ditambahkan: ");
+                                    scanner.nextLine(); // Membersihkan newline character dari input sebelumnya
+                                    String namaMobil = scanner.nextLine();
+                                    System.out.print("Masukkan harga sewa per hari: ");
+                                    double hargaMobil = scanner.nextDouble();
+                                    garasi.tambahMobil(new Mobil(namaMobil, hargaMobil) {
+                                        @Override
+                                        public String getTipe() {
+                                            return null;
+                                        }
+                                    });
+                                    System.out.println("Mobil " + namaMobil + " berhasil ditambahkan.");
+                                    break;
+                                case 2:
+                                    isAdminMode = false;
+                                    System.out.println("Keluar dari Mode Admin.");
+                                    break;
+                                case 3:
+                                    garasi.tampilkanRiwayatPenyewa();
+                                    break;
+                                default:
+                                    System.out.println("Pilihan tidak valid.");
+                                    break;
+                            }
+                        } while (pilihan != 2);
                     } else {
-                        System.out.print("Masukkan password Admin: ");
-                        String password = scanner.next();
-                        if (garasi.isValidPassword(password)) {
-                            System.out.println("Mode Admin diakses.");
-                            isAdminMode = true;
-                        } else {
-                            System.out.println("Password Admin salah. Mode Admin tidak dapat diakses.");
-                        }
+                        System.out.println("Password Admin salah. Mode Admin tidak dapat diakses.");
                     }
                     break;
                 default:
@@ -78,7 +109,12 @@ public class Main {
                     break;
             }
 
-        } while (pilihan != 4);
+            if (isAdminMode) {
+                if (pilihan == 5) {
+                    System.out.println("Anda harus keluar dari Mode Admin terlebih dahulu untuk mengakses menu lain.");
+                    isAdminMode = false;
+                }
+            }
+        } while (pilihan != 5);
     }
-
 }
