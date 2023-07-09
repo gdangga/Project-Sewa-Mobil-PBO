@@ -5,21 +5,18 @@ public class Main {
         Garasi garasi = new Garasi("admin321");
 
         garasi.tambahMobil(new Mobil("Toyota Avanza", 250000) {
-            @Override
             public String getTipe() {
-                return null;
+                return "Mpv";
             }
         });
         garasi.tambahMobil(new Mobil("Toyota Innova", 350000) {
-            @Override
             public String getTipe() {
-                return null;
+                return "MPV";
             }
         });
         garasi.tambahMobil(new Mobil("Suzuki Ertiga", 250000) {
-            @Override
             public String getTipe() {
-                return null;
+                return "MPV";
             }
         });
         garasi.tambahMobil(new SUV("Toyota Fortuner", 500000, "4x4"));
@@ -83,4 +80,5 @@ public class Main {
 
         } while (pilihan != 4);
     }
+
 }
