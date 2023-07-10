@@ -29,7 +29,7 @@ class Garasi {
                 mobil.setDisewa(true);
                 mobil.setPenyewa(penyewa);
                 double totalHarga = mobil.getHarga() * durasi;
-                System.out.println("Mobil " + mobil.getNama() + " berhasil disewa oleh " + penyewa);
+                System.out.println("Mobil " + mobil.getNama() + " berhasil disewa oleh " + penyewa+ " Dengan Tipe: " +mobil.getTipe());
                 System.out.println("Durasi: " + durasi + " hari");
                 System.out.println("Total Harga: " + totalHarga);
                 tambahkanRiwayatPenyewa(penyewa, mobil.getNama());
