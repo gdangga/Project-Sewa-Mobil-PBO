@@ -39,8 +39,8 @@ import java.util.Scanner;
                         System.out.print("Masukkan durasi sewa (dalam hari): ");
                         int durasi = scanner.nextInt();
                         garasi.sewaMobil(indeksSewa, penyewa, durasi);
-
                         break;
+
                     case 2:
                         if (isAdminMode) {
                             System.out.println("Anda berada dalam Mode Admin. Tidak dapat melakukan aksi ini.");
@@ -50,6 +50,7 @@ import java.util.Scanner;
                         int indeksKembali = scanner.nextInt();
                         garasi.kembalikanMobil(indeksKembali);
                         break;
+
                     case 3:
                         System.out.print("Masukkan password Admin: ");
                         String password = scanner.next();
@@ -84,21 +85,26 @@ import java.util.Scanner;
                                         }
                                         System.out.println("Mobil " + namaMobil + " berhasil ditambahkan.");
                                         break;
+
                                     case 2:
                                         isAdminMode = false;
                                         System.out.println("Keluar dari Mode Admin.");
                                         break;
+
                                     case 3:
                                         garasi.tampilkanRiwayatPenyewa();
                                         break;
+
                                     case 4:
                                         System.out.print("Masukkan indeks mobil yang ingin dihapus: ");
                                         int indeksHapus = scanner.nextInt();
                                         garasi.hapusMobil(indeksHapus);
                                         break;
+
                                     default:
                                         System.out.println("Pilihan tidak valid.");
                                         break;
+
                                 }
                             } while (pilihan != 2);
                         } else {
