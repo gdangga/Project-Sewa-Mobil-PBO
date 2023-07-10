@@ -20,7 +20,7 @@ class Garasi {
 
     public void tambahMobil(SUV suv) {
         daftarMobil.add(suv);
-    }
+    } 
 
     public void sewaMobil(int indeks, String penyewa, int durasi) {
         if (indeks >= 1 && indeks <= daftarMobil.size()) {
