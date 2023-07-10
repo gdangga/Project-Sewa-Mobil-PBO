@@ -33,6 +33,8 @@ class Garasi {
                 System.out.println("Durasi: " + durasi + " hari");
                 System.out.println("Total Harga: " + totalHarga);
                 tambahkanRiwayatPenyewa(penyewa, mobil.getNama());
+                GDsRentcar rentcar = new GDsRentcar();
+                rentcar.displayThankYouMessage(penyewa);
             } else {
                 System.out.println("Mobil " + mobil.getNama() + " sudah disewa.");
             }
@@ -42,27 +44,30 @@ class Garasi {
     }
 
     public void kembalikanMobil(int indeks) {
-        if (indeks >= 1 && indeks <= daftarMobil.size()) {
-            Mobil mobil = daftarMobil.get(indeks - 1);
-            if (mobil.isDisewa()) {
-                Scanner scanner = new Scanner(System.in);
-                System.out.print("Masukkan nama penyewa: ");
-                String namaPenyewa = scanner.nextLine();
+        try {
+            if (indeks >= 1 && indeks <= daftarMobil.size()) {
+                Mobil mobil = daftarMobil.get(indeks - 1);
+                if (mobil.isDisewa()) {
+                    Scanner scanner = new Scanner(System.in);
+                    System.out.print("Masukkan nama penyewa: ");
+                    String namaPenyewa = scanner.nextLine();
 
-                if (namaPenyewa.equalsIgnoreCase(mobil.getPenyewa())) {
-                    mobil.setDisewa(false);
-                    mobil.setPenyewa("");
-                    System.out.println("Mobil " + mobil.getNama() + " berhasil dikembalikan oleh " + namaPenyewa + " Terimakasih.");
+                    if (namaPenyewa.equalsIgnoreCase(mobil.getPenyewa())) {
+                        mobil.setDisewa(false);
+                        mobil.setPenyewa("");
+                        System.out.println("Mobil " + mobil.getNama() + " berhasil dikembalikan oleh " + namaPenyewa + " Terimakasih.");
+                    } else {
+                        System.out.println("Nama penyewa yang dimasukkan tidak sesuai. Mobil " + mobil.getNama() + " tidak dapat dikembalikan.");
+                    }
                 } else {
-                    System.out.println("Nama penyewa yang dimasukkan tidak sesuai. Mobil " + mobil.getNama() + " tidak dapat dikembalikan.");
+                    System.out.println("Mobil " + mobil.getNama() + " tidak sedang disewa.");
                 }
-            } else {
-                System.out.println("Mobil " + mobil.getNama() + " tidak sedang disewa.");
             }
-        } else {
-            System.out.println("Indeks mobil tidak valid.");
+        } catch (Exception e) {
+            System.out.println("Terjadi kesalahan: " + e.getMessage());
         }
     }
+
 
     public void tampilkanDaftarMobil() {
         System.out.println(" ");
@@ -90,6 +95,8 @@ class Garasi {
     }
 
     public void tampilkanRiwayatPenyewa() {
+        System.out.println(" ");
+        System.out.println(" ");
         System.out.println("Riwayat Penyewa:");
         for (String penyewa : riwayatPenyewa.keySet()) {
             System.out.println("Penyewa: " + penyewa);

@@ -33,14 +33,13 @@ import java.util.Scanner;
                         }
                         System.out.print("Masukkan indeks mobil yang ingin disewa: ");
                         int indeksSewa = scanner.nextInt();
-                        scanner.nextLine(); // Membersihkan newline character dari input sebelumnya
+                        scanner.nextLine();
                         System.out.print("Masukkan nama penyewa: ");
                         String penyewa = scanner.nextLine();
                         System.out.print("Masukkan durasi sewa (dalam hari): ");
                         int durasi = scanner.nextInt();
                         garasi.sewaMobil(indeksSewa, penyewa, durasi);
-                        GDsRentcar rentcar = new GDsRentcar();
-                        rentcar.displayThankYouMessage(penyewa);
+
                         break;
                     case 2:
                         if (isAdminMode) {
