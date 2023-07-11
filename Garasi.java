@@ -29,9 +29,20 @@ class Garasi {
                 mobil.setDisewa(true);
                 mobil.setPenyewa(penyewa);
                 double totalHarga = mobil.getHarga() * durasi;
-                System.out.println("Mobil " + mobil.getNama() + " berhasil disewa oleh " + penyewa+ " Dengan Tipe: " +mobil.getTipe());
+
+                if (mobil instanceof SUV) {
+                    SUV suv = (SUV) mobil;
+                    System.out.println("");
+                    System.out.println("");
+                    System.out.println("Mobil " + suv.getNama() + " berhasil disewa oleh " + penyewa + " dengan tipe " + suv.getTipe());
+                    System.out.println("Sistem Penggerak: " + suv.getSistemPenggerak());
+                } else {
+                    System.out.println("Mobil " + mobil.getNama() + " berhasil disewa oleh " + penyewa + " dengan tipe " + mobil.getTipe());
+                }
+
                 System.out.println("Durasi: " + durasi + " hari");
                 System.out.println("Total Harga: " + totalHarga);
+
                 tambahkanRiwayatPenyewa(penyewa, mobil.getNama());
                 GDsRentcar rentcar = new GDsRentcar();
                 rentcar.displayThankYouMessage(penyewa);
@@ -42,6 +53,7 @@ class Garasi {
             System.out.println("Indeks mobil tidak valid.");
         }
     }
+
 
     public void kembalikanMobil(int indeks) {
         try {
