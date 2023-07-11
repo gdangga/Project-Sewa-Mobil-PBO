@@ -50,6 +50,14 @@ class Mobil {
     public String toString() {
         return getNama() + " - Tipe: " + getTipe() + " - Harga per Hari: " + getHarga();
     }
+
+    public Mobil(){
+        this.nama = "Toyota Yaris";
+        this.disewa = false;
+        this.penyewa = "";
+        this.harga = 400000;
+        this.tipe = "City Car";
+    }
 }
 
 class SUV extends Mobil {

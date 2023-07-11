@@ -11,7 +11,7 @@ import java.util.Scanner;
             garasi.tambahMobil(new Mobil("Suzuki Ertiga", 250000, "MPV"));
             garasi.tambahMobil(new SUV("Toyota Fortuner", 500000, "SUV", "4x4"));
             garasi.tambahMobil(new SUV("Mitsubishi Pajero Sport", 600000, "SUV", "4x4"));
-
+            garasi.tambahMobil(new Mobil());
             Scanner scanner = new Scanner(System.in);
             int pilihan;
             boolean isAdminMode = false;
