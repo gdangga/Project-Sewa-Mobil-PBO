@@ -52,7 +52,7 @@ import java.util.Scanner;
                         garasi.kembalikanMobil(indeksKembali);
                         break;
 
-                    //mode admin    
+                    //mode admin
                     case 3:
                         System.out.print("Masukkan password Admin: ");
                         String password = scanner.next();
