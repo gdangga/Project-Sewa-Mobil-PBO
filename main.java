@@ -16,6 +16,7 @@ import java.util.Scanner;
             int pilihan;
             boolean isAdminMode = false;
 
+            //menu awal
             do {
                 garasi.tampilkanDaftarMobil();
                 System.out.println("\n===== Menu =====");
@@ -51,6 +52,7 @@ import java.util.Scanner;
                         garasi.kembalikanMobil(indeksKembali);
                         break;
 
+                    //mode admin    
                     case 3:
                         System.out.print("Masukkan password Admin: ");
                         String password = scanner.next();
