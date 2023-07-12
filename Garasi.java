@@ -136,6 +136,66 @@ class Garasi {
     }
 
 
+    //penambahan menu edit revisi
+    public void editMobil(int indeks) {
+        if (indeks >= 1 && indeks <= daftarMobil.size()) {
+            Mobil mobil = daftarMobil.get(indeks - 1);
+            if (!mobil.isDisewa()) {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Edit Mobil " + mobil.getNama());
+                System.out.println("Pilihan yang dapat diedit:");
+                System.out.println("1. Nama");
+                System.out.println("2. Harga");
+                System.out.println("3. Tipe");
+                if (mobil instanceof SUV) {
+                    System.out.println("4. Sistem Penggerak (Hanya untuk SUV)");
+                }
+                System.out.print("Masukkan pilihan Anda: ");
+                int pilihan = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (pilihan) {
+                    case 1:
+                        System.out.print("Masukkan nama baru: ");
+                        String namaru = scanner.nextLine();
+                        mobil.setNama(namaru);
+                        System.out.println("Nama mobil berhasil diubah menjadi: " + namaru);
+                        break;
+                    case 2:
+                        System.out.print("Masukkan harga baru: ");
+                        double hargaru = scanner.nextDouble();
+                        mobil.setHarga(hargaru);
+                        System.out.println("Harga mobil berhasil diubah menjadi: " + hargaru);
+                        break;
+                    case 3:
+                        System.out.print("Masukkan tipe baru: ");
+                        String tiperu = scanner.nextLine();
+                        mobil.setTipe(tiperu);
+                        System.out.println("Tipe mobil berhasil diubah menjadi: " + tiperu);
+                        break;
+                    case 4:
+                        if (mobil instanceof SUV) {
+                            SUV suv = (SUV) mobil;
+                            System.out.print("Masukkan sistem penggerak baru: ");
+                            String sistemPenggerakBaru = scanner.nextLine();
+                            suv.setSistemPenggerak(sistemPenggerakBaru);
+                            System.out.println("Sistem penggerak mobil berhasil diubah menjadi: " + sistemPenggerakBaru);
+                        } else {
+                            System.out.println("Pilihan tidak valid. Hanya mobil SUV yang memiliki pilihan ini.");
+                        }
+                        break;
+                    default:
+                        System.out.println("Pilihan tidak valid.");
+                        break;
+                }
+            } else {
+                System.out.println("Mobil " + mobil.getNama() + " sedang disewa. Tidak dapat mengedit mobil yang sedang disewa.");
+            }
+        } else {
+            System.out.println("Indeks mobil tidak valid.");
+        }
+    }
+
     public boolean isValidPassword(String password) {
         return password.equals(passwordAdmin);
     }

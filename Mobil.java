@@ -58,6 +58,18 @@ class Mobil {
         this.harga = 400000;
         this.tipe = "City Car";
     }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public void setHarga(double harga) {
+        this.harga = harga;
+    }
+
+    public void setTipe(String tipe) {
+        this.tipe = tipe;
+    }
 }
 
 class SUV extends Mobil {
@@ -74,5 +86,9 @@ class SUV extends Mobil {
     @Override
     public String toString() {
         return super.toString() + " - Sistem Penggerak: " + getSistemPenggerak();
+    }
+
+    public void setSistemPenggerak(String sistemPenggerak) {
+        this.sistemPenggerak = sistemPenggerak;
     }
 }

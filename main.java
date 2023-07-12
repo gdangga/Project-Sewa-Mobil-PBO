@@ -65,6 +65,7 @@ import java.util.Scanner;
                                 System.out.println("2. Kembali ke Menu Utama");
                                 System.out.println("3. Tampilkan Riwayat Penyewa");
                                 System.out.println("4. Hapus Mobil dari garasi");
+                                System.out.println("5. Edit Informasi Mobil");
                                 System.out.print("Pilihan Anda: ");
                                 pilihan = scanner.nextInt();
 
@@ -102,7 +103,11 @@ import java.util.Scanner;
                                         int indeksHapus = scanner.nextInt();
                                         garasi.hapusMobil(indeksHapus);
                                         break;
-
+                                    case 5:
+                                        System.out.print("Masukkan indeks mobil yang ingin diedit: ");
+                                        int indeksEdit = scanner.nextInt();
+                                        garasi.editMobil(indeksEdit);
+                                        break;
                                     default:
                                         System.out.println("Pilihan tidak valid.");
                                         break;
